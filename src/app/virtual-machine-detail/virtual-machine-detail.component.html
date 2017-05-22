@@ -1,0 +1,41 @@
+<div class="panel">
+    <h2>VM {{ vm?.name }}</h2>
+
+    <table>
+        <tr><th>Active</th><td>{{     vm?.active     | boolean }}</td></tr>
+        <tr><th>Autostart</th><td>{{  vm?.autostart  | boolean }}</td></tr>
+        <tr><th>Persistent</th><td>{{ vm?.persistent | boolean }}</td></tr>
+        <tr><th>Updated</th><td>{{    vm?.updated    | boolean }}</td></tr>
+    </table>
+    <table>
+        <tr><th>Virtualization type</th><td>{{ vm?.os                     }}</td></tr>
+        <tr><th>CPUs</th><td>{{                vm?.nrVirtCpu              }}</td></tr>
+        <tr><th>Memory</th><td>{{ vm?.mem * 1024 | memory }} ({{ vm?.maxMem * 1024 | memory }} max)</td></tr>
+        <tr><th>UUID</th><td>{{                vm?.uuid                   }}</td></tr>
+    </table>
+</div>
+<div class="stats panel">
+    <h2>CPU usage</h2>
+</div>
+<div class="stats panel">
+    <h2>Network usage</h2>
+</div>
+<div class="stats panel">
+    <h2>I/O usage</h2>
+</div>
+<div class="panel">
+    <h2>VM control</h2>
+    <div class="buttonGroup">
+        <button *ngIf="!vm?.active">Start</button>
+        <button *ngIf="vm?.active">Pause</button>
+        <button *ngIf="vm?.active">Stop</button>
+        <button *ngIf="vm?.active">Kill</button>
+        <button *ngIf="vm?.active">Reset</button>
+    </div>
+    <div class="buttonGroup">
+        <button *ngIf="vm?.active">Ctrl-Alt-Delete</button>
+    </div>
+    <div class="buttonGroup">
+        <button *ngIf="vm?.active">Insert CD</button>
+    </div>
+</div>

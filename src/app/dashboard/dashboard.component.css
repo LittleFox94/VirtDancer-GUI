@@ -1,0 +1,17 @@
+.usage_panel {
+    width: calc(50% - 1em);
+    float: left;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    text-align: center;
+    min-height: 25em;
+}
+
+@media (max-width: 1082px) {
+    .usage_panel {
+        width: 97%;
+        box-sizing: border-box;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+    }
+}

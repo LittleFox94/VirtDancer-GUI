@@ -1,0 +1,115 @@
+.panel {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    clear: both;
+    overflow: auto;
+}
+
+.panel:first-child table {
+    width: calc(50% - 1em);
+    float: left;
+    border: 1px solid rgba(0, 0, 0, 0.56);
+    border-radius: 0.2em;
+    border-spacing: 0;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.panel:first-child tr:nth-of-type(2n+1) {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.panel:first-child th,
+.panel:first-child td {
+    vertical-align: top;
+    padding: 0.2em;
+}
+
+
+.panel:first-child th {
+    font-weight: normal;
+    text-align: right;
+    width: 35%;
+}
+
+.panel:first-child td {
+    font-style: italic;
+    text-align: left;
+    padding-left: 1em;
+}
+
+.stats.panel {
+    width: calc(33% - 0.4em);
+    margin-left: 0.5em;
+    margin-right: 0;
+    margin-bottom: 1em;
+    float: left;
+    clear: none;
+}
+
+.stats.panel:first-child {
+    margin-left: 0;
+}
+
+.stats.panel:last-child {
+    margin-right: 0.5em;
+}
+
+.panel .buttonGroup {
+    border-right: 1px solid rgba(0, 0, 0, 0.56);
+    margin-right: 0.5em;
+    display: inline;
+}
+
+.panel .buttonGroup:last-of-type {
+    border-right: none;
+}
+
+.panel button {
+    border: none;
+    border-radius: 0.2em;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+    background-color: rgba(52, 106, 220, 0.87);
+    color: rgba(255, 255, 255, 0.87);
+    font-size: 1.1em;
+    padding: 0.4em;
+    height: 1.7em;
+    line-height: 0.9em;
+    min-width: 3em;
+    cursor: pointer;
+    margin-right: 0.2em;
+}
+
+.panel button:hover {
+    background-color: rgba(52, 106, 220, 0.7);
+}
+
+.panel button:focus {
+    outline: none;
+}
+
+.panel button:active {
+    background-color: rgba(52, 106, 220, 1);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8) inset;
+    outline: none;
+}
+
+@media (max-width: 1456px) {
+    .stats.panel {
+        width: calc(100% - 1em);
+        margin-top: 1em;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        float: none;
+    }
+}
+
+@media (max-width: 920px) {
+    .panel:first-child table {
+        width: calc(100% - 1em);
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        margin-bottom: 1em;
+        float: none;
+    }
+}

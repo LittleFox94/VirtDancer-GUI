@@ -1,3 +1,16 @@
-<h1>
-  {{title}}
-</h1>
+<header>
+    <a (click)='toggleVmList()'>☰</a>
+    <h1>{{title}}</h1>
+    <div id="toolbar" [ngClass]="{'overflowMenu': overflowMenuVisible}">
+        <a (click)='overflowMenuVisible = false' routerLinkActive="active" routerLink="/dashboard">Dashboard</a>
+        <a (click)='overflowMenuVisible = false' routerLinkActive="active" routerLink="/create">New VM</a>
+        <a (click)='overflowMenuVisible = false' routerLinkActive="active" routerLink="/config">Configuration</a>
+    </div>
+    <a id="toolbarOverflowButton" (click)='toggleOverflowMenu()'>⋮</a>
+</header>
+<div id="vmlist" [ngClass]="{'visible': vmListVisible}" (click)='vmListVisible = false'>
+    <app-virtual-machine-list></app-virtual-machine-list>
+</div>
+<main>
+    <router-outlet></router-outlet>
+</main>

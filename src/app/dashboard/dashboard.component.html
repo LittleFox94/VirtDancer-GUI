@@ -1,0 +1,27 @@
+<div class="panel usage_panel">
+    CPU usage
+    <rest-chart apiUrl="/stats/cpu" [datasets]="['usr', 'sys']"></rest-chart>
+</div>
+<div class="panel usage_panel">
+    Memory usage
+    <rest-chart apiUrl="/stats/mem" [datasets]="['memFree', 'memBuffer', 'swapFree']" [divisor]="ram_chart_unit"></rest-chart>
+
+    Unit:
+    <input type="radio" name="ram_chart_unit" (click)="ram_chart_unit = 1"          id="ram_chart_unit_b" checked><label for="ram_chart_unit_b">B</label>
+    <input type="radio" name="ram_chart_unit" (click)="ram_chart_unit = 1024"       id="ram_chart_unit_k"        ><label for="ram_chart_unit_k">KiB</label>
+    <input type="radio" name="ram_chart_unit" (click)="ram_chart_unit = 1048576"    id="ram_chart_unit_m"        ><label for="ram_chart_unit_m">MiB</label>
+    <input type="radio" name="ram_chart_unit" (click)="ram_chart_unit = 1073741824" id="ram_chart_unit_g"        ><label for="ram_chart_unit_g">GiB</label>
+</div>
+<div class="panel usage_panel">
+    I/O usage
+</div>
+<div class="panel usage_panel">
+    Network usage
+    <rest-chart apiUrl="/stats/nic" [divisor]="net_chart_unit" mode="difference"></rest-chart>
+
+    Unit:
+    <input type="radio" name="net_chart_unit" (click)="net_chart_unit = 1"          id="net_chart_unit_b" checked><label for="net_chart_unit_b">B</label>
+    <input type="radio" name="net_chart_unit" (click)="net_chart_unit = 1024"       id="net_chart_unit_k"        ><label for="net_chart_unit_k">KiB</label>
+    <input type="radio" name="net_chart_unit" (click)="net_chart_unit = 1048576"    id="net_chart_unit_m"        ><label for="net_chart_unit_m">MiB</label>
+    <input type="radio" name="net_chart_unit" (click)="net_chart_unit = 1073741824" id="net_chart_unit_g"        ><label for="net_chart_unit_g">GiB</label>
+</div>
