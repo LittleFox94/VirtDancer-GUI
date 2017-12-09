@@ -24,7 +24,7 @@ deploy:
   - build
   before_script:
   - apk update
-  - apk install rsync openssh
+  - apk add rsync openssh
   script:
   - mkdir ~/.ssh
   - echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
