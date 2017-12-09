@@ -10,10 +10,18 @@ build:
   - yarn install
   script:
   - ng build --target production --output-path out --aot --vendor false --ex true --base-href /ui/
+  artifacts:
+    paths:
+    - out
+  cache:
+    paths:
+    - node_modules
 
 deploy:
   stage: deploy
   image: alpine
+  dependencies:
+  - build
   before_script:
   - apk update
   - apk install rsync openssh
