@@ -1,0 +1,23 @@
+stages:
+- build
+- deploy
+
+build:
+  stage: build
+  image: node
+  before_script:
+  - export PATH=$PATH:./node_modules/.bin
+  - yarn install
+  script:
+  - ng build --target production --output-path out --aot --vendor false --ex true --base-href /ui/
+
+deploy:
+  stage: deploy
+  image: alpine
+  before_script:
+  - apk update
+  - apk install rsync openssh
+  script:
+  - mkdir ~/.ssh
+  - echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+  - rsync --delete -a out/ root@rahja.lf-net.org:/opt/virtdancer-ui/
