@@ -68,7 +68,7 @@
 .panel button {
     border: none;
     border-radius: 0.2em;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
     background-color: rgba(52, 106, 220, 0.87);
     color: rgba(255, 255, 255, 0.87);
     font-size: 1.1em;
@@ -81,7 +81,7 @@
 }
 
 .panel button:hover {
-    background-color: rgba(52, 106, 220, 0.7);
+    background-color: rgba(52, 106, 220, 0.77);
 }
 
 .panel button:focus {
@@ -90,7 +90,7 @@
 
 .panel button:active {
     background-color: rgba(52, 106, 220, 1);
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8) inset;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4) inset;
     outline: none;
 }
 
