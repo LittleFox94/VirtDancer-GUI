@@ -28,4 +28,5 @@ deploy:
   script:
   - mkdir ~/.ssh
   - echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+  - chmod 0600 ~/.ssh/id_rsa
   - rsync -e "ssh -o StrictHostKeyChecking=no" --delete -a out/ root@rahja.lf-net.org:/opt/virtdancer-ui/
