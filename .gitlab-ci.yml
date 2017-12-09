@@ -28,4 +28,4 @@ deploy:
   script:
   - mkdir ~/.ssh
   - echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
-  - rsync -o StrictHostKeyChecking=no --delete -a out/ root@rahja.lf-net.org:/opt/virtdancer-ui/
+  - rsync -e "ssh -o StrictHostKeyChecking=no" --delete -a out/ root@rahja.lf-net.org:/opt/virtdancer-ui/
