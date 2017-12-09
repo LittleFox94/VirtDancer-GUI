@@ -11,6 +11,7 @@ import { Filter }                        from './filter.pipe';
 import { Memory }                        from './memory.pipe';
 import { BooleanPipe }                   from './boolean.pipe';
 import { VirtualMachineStatePipe }       from './virtual-machine-state.pipe';
+import { VirtualMachineSortPipe }        from './virtual-machine-sort.pipe';
 
 import { AppComponent }                  from './app.component';
 import { DashboardComponent }            from './dashboard/dashboard.component';
@@ -23,9 +24,10 @@ import { VirtdancerService }             from './virtdancer.service';
 import { RestChartComponent }            from './rest-chart/rest-chart.component';
 
 const appRoutes: Routes = [
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'create',    component: VirtualMachineWizardComponent },
-    { path: 'config',    component: ConfigurationComponent },
+    { path: '',                 redirectTo: '/dashboard', pathMatch: 'full' },
+    { path: 'dashboard',        component: DashboardComponent },
+    { path: 'create',           component: VirtualMachineWizardComponent },
+    { path: 'config',           component: ConfigurationComponent },
     { path: 'vm-detail/:id',    component: VirtualMachineDetailComponent },
 ];
 
@@ -44,6 +46,7 @@ const appRoutes: Routes = [
         Memory,
         BooleanPipe,
         VirtualMachineStatePipe,
+        VirtualMachineSortPipe,
     ],
     imports: [
         BrowserModule,

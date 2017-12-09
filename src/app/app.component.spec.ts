@@ -1,6 +1,8 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
+import { VirtualMachineDetailComponent } from './virtual-machine-detail/virtual-machine-detail.component';
+import { VirtualMachineListComponent } from './virtual-machine-list/virtual-machine-list.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -17,7 +19,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app works!'`, async(() => {
+  it(`should have as title 'VirtDancer'`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('VirtDancer');

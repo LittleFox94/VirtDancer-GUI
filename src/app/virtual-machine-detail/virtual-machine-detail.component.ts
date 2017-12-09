@@ -13,6 +13,7 @@ export class VirtualMachineDetailComponent implements OnInit {
 
     vm: VirtualMachine;
     lastError: string;
+    cpuStatsApi: string = null;
 
     constructor(private api: VirtdancerService, private route: ActivatedRoute) { }
 
@@ -20,7 +21,10 @@ export class VirtualMachineDetailComponent implements OnInit {
         this.route.params.subscribe(
             params => {
                 this.api.getVirtualMachine(params['id']).subscribe(
-                    vm    => this.vm = vm,
+                    vm  => {
+                        this.vm = vm;
+                        this.cpuStatsApi = '/vm/' + vm.uuid + '/stats/cpu';
+                    },
                     error => this.lastError = error,
                 );
             },

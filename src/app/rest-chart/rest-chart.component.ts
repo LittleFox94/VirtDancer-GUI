@@ -45,12 +45,35 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
     constructor(private api: VirtdancerService, private http: Http) { }
 
     ngOnInit() {
+        this.reset();
+    }
+
+    reset() {
+        if(this.observable) {
+            this.observable.unsubscribe();
+        }
+
         let closureThis = this;
 
         this.options = {
             responsive: true,
             maintainAspectRatio: false,
+            animation: {
+                duration: 250,
+            },
         };
+
+        if(this.mode == 'percentage') {
+            this.options.scales = {
+                yAxes: [{
+                    ticks: {
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        beginAtZero: true,
+                    },
+                }],
+            };
+        }
 
         this.data = {
             labels: [],
@@ -104,9 +127,7 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
                         }
 
                         if(!foundDataset && this.datasets.length == 0) {
-                            this.addDataSet(key);
-
-                            let dataset = this.data.datasets[this.data.datasets.length - 1];
+                            let dataset = this.addDataSet(key);
 
                             if(dataset.data.length > this.maxData) {
                                 dataset.data.shift();
@@ -119,8 +140,7 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
                     closureThis.chart.chart.update();
                 }
             );
-        });
-    }
+        });    }
 
     ngOnDestroy() {
         this.observable.unsubscribe();
@@ -140,25 +160,42 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
                     }
                 }
             }
+            else if(property == 'apiUrl') {
+                this.reset();
+            }
         }
     }
 
     addDataSet(name: string) {
-        this.data.datasets.push(
-            {
-                label: name,
-                data: [],
-                borderWidth: 2,
-                borderColor: this.colors[(this.data.datasets.length) % this.colors.length],
-                backgroundColor: 'transparent',
-                pointRadius: 1,
-            },
-        );
+        let dataset = {
+            label: name,
+            data: [],
+            borderWidth: 2,
+            borderColor: this.colors[(this.data.datasets.length) % this.colors.length],
+            backgroundColor: 'transparent',
+            pointRadius: 1,
+        };
+
+        this.data.datasets.push(dataset);
 
         let datacount: number = this.data.datasets[0].data.length;
 
         for(var i = 0; i < datacount; i++) {
-            this.data.datasets[this.data.datasets.length - 1].data.push(null);
+            dataset.data.push(null);
         }
+
+        this.data.datasets.sort((a1, a2) => {
+            if(a1.label > a2.label) {
+                return 1;
+            }
+            else if(a1.label < a2.label) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        });
+
+        return dataset;
     }
 }

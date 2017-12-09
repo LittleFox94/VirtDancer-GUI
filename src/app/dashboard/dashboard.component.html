@@ -1,6 +1,6 @@
 <div class="panel usage_panel">
     CPU usage
-    <rest-chart apiUrl="/stats/cpu" [datasets]="['usr', 'sys']"></rest-chart>
+    <rest-chart apiUrl="/stats/cpu" [datasets]="['usr', 'sys']" mode="percentage"></rest-chart>
 </div>
 <div class="panel usage_panel">
     Memory usage
@@ -17,7 +17,7 @@
 </div>
 <div class="panel usage_panel">
     Network usage
-    <rest-chart apiUrl="/stats/nic" [divisor]="net_chart_unit" mode="difference"></rest-chart>
+    <rest-chart apiUrl="/stats/nic?filter=physical" [divisor]="net_chart_unit" mode="difference"></rest-chart>
 
     Unit:
     <input type="radio" name="net_chart_unit" (click)="net_chart_unit = 1"          id="net_chart_unit_b" checked><label for="net_chart_unit_b">B</label>

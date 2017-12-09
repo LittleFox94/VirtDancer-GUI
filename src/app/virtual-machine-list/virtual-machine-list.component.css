@@ -71,6 +71,7 @@ a.active {
 
 a .listTitle {
     display: inline;
+    font-weight: normal;
 }
 
 a .listSubtitle {

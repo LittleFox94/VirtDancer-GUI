@@ -1,6 +1,6 @@
 <div>
     <input type="text" [(ngModel)]="filter">
-    <a *ngFor="let vm of virtualMachines | filter:'name':filter | orderBy : ['name']" routerLink="/vm-detail/{{ vm.uuid }}" routerLinkActive="active">
+    <a *ngFor="let vm of virtualMachines | filter:'name':filter | virtualMachineSort" routerLink="/vm-detail/{{ vm.uuid }}" routerLinkActive="active">
         <span class="listSubtitle">{{ vm | VirtualMachineState }}</span>
         <span class="listTitle">{{ vm.name }}</span>
     </a>
