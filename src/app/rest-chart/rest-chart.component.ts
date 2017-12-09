@@ -198,10 +198,6 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
 
         let datacount: number = this.data.datasets[0].data.length - 1;
 
-        if (datacount < this.maxData) {
-            datacount = this.maxData;
-        }
-
         for(var i = 0; i < datacount; i++) {
             dataset.data.push(null);
         }
