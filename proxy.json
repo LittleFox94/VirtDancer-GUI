@@ -1,8 +1,5 @@
 {
     "/api": {
-        "pathRewrite": {
-            "^/api": ""
-        },
         "target": "https://rahja.lf-net.org/",
         "secure": false
     }

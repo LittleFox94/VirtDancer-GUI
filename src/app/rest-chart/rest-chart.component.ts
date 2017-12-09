@@ -34,10 +34,11 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
     options: any;
     data: any;
     observable: any;
+    interval: number = 1000;
 
     @Input() apiUrl: string;
     @Input() datasets: string[] = [];
-    @Input() maxData: number = 20;
+    @Input() maxData: number = 30;
     @Input() divisor: number = 1;
     @Input() mode: string = 'raw';
     @ViewChild('chart') chart: ChartComponent;
@@ -49,10 +50,6 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     reset() {
-        if(this.observable) {
-            this.observable.unsubscribe();
-        }
-
         let closureThis = this;
 
         this.options = {
@@ -85,62 +82,8 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
             this.addDataSet(key);
         }
 
-        this.observable = IntervalObservable.create(1000).subscribe(() => {
-            this.http.get('/api' + this.apiUrl).subscribe(
-                res => {
-                    let data = res.json();
-                    let time = new Date();
-
-                    if(closureThis.data.labels.length > this.maxData) {
-                        closureThis.data.labels.shift();
-                    }
-
-                    let datePipe      = new DatePipe('en-us');
-                    let formattedTime = datePipe.transform(time, 'HH:mm:ss');
-                    closureThis.data.labels.push(formattedTime);
-
-                    for(let key in data) {
-                        var foundDataset: boolean = false;
-
-                        for(let dataset of closureThis.data.datasets) {
-                            if(dataset.label == key) {
-                                if(dataset.data.length > this.maxData) {
-                                    dataset.data.shift();
-                                }
-
-                                var value = data[key];
-
-                                if(closureThis.mode == 'difference') {
-                                    if(dataset.previousValue !== undefined) {
-                                        value -= dataset.previousValue;
-                                    }
-                                    else {
-                                        value = 0;
-                                    }
-
-                                    dataset.previousValue = data[key];
-                                }
-
-                                dataset.data.push(value / this.divisor);
-                                foundDataset = true;
-                            }
-                        }
-
-                        if(!foundDataset && this.datasets.length == 0) {
-                            let dataset = this.addDataSet(key);
-
-                            if(dataset.data.length > this.maxData) {
-                                dataset.data.shift();
-                            }
-
-                            dataset.data.push(value / this.divisor);
-                        }
-                    }
-
-                    closureThis.chart.chart.update();
-                }
-            );
-        });    }
+        this.setupInterval();
+    }
 
     ngOnDestroy() {
         this.observable.unsubscribe();
@@ -166,6 +109,81 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
         }
     }
 
+    setupInterval() {
+        let closureThis = this;
+
+        if(this.observable) {
+            this.observable.unsubscribe();
+        }
+
+        this.observable = IntervalObservable.create(this.interval).subscribe(() => {
+            this.http.get('/api' + this.apiUrl).subscribe(
+                res => {
+                    let data = res.json();
+                    let time = new Date();
+
+                    if(closureThis.data.labels.length > this.maxData) {
+                        closureThis.data.labels.shift();
+                    }
+
+                    let datePipe      = new DatePipe('en-us');
+                    let formattedTime = datePipe.transform(time, 'HH:mm:ss');
+                    closureThis.data.labels.push(formattedTime);
+
+                    for(let key in data) {
+                        var foundDataset: boolean = false;
+
+                        for(let dataset of closureThis.data.datasets) {
+                            if(dataset.label == key) {
+                                if(dataset.data.length > this.maxData) {
+                                    dataset.data.shift();
+                                }
+
+                                var value = data[key];
+
+                                if(closureThis.mode == 'difference') {
+                                    let timestamp = Date.now();
+
+                                    if(dataset.previousValue !== undefined) {
+                                        value -= dataset.previousValue;
+                                    }
+                                    else {
+                                        value = 0;
+                                    }
+
+                                    if(dataset.previousTimestamp !== undefined) {
+                                        value                /= (timestamp - dataset.previousTimestamp) / 1000;
+                                        dataset.previousValue = data[key];
+                                    }
+                                    else {
+                                        value = 0;
+                                    }
+
+                                    dataset.previousTimestamp = timestamp;
+                                }
+
+                                dataset.data.push(value / this.divisor);
+                                foundDataset = true;
+                            }
+                        }
+
+                        if(!foundDataset && this.datasets.length == 0) {
+                            let dataset = this.addDataSet(key);
+
+                            if(dataset.data.length > this.maxData) {
+                                dataset.data.shift();
+                            }
+
+                            dataset.data.push(value / this.divisor);
+                        }
+                    }
+
+                    closureThis.chart.chart.update();
+                }
+            );
+        });
+    }
+
     addDataSet(name: string) {
         let dataset = {
             label: name,
@@ -178,7 +196,11 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
 
         this.data.datasets.push(dataset);
 
-        let datacount: number = this.data.datasets[0].data.length;
+        let datacount: number = this.data.datasets[0].data.length - 1;
+
+        if (datacount < this.maxData) {
+            datacount = this.maxData;
+        }
 
         for(var i = 0; i < datacount; i++) {
             dataset.data.push(null);
