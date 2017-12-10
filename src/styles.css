@@ -3,7 +3,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    font-family: 'Droid Sans', 'Liberation Sans', sans-serif;
+    font-family: 'Roboto', 'Droid Sans', 'Liberation Sans', sans-serif;
     font-size: 14pt;
     background-color: rgba(0, 0, 0, 0.1);
     color: rgba(0, 0, 0, 0.87);
@@ -162,10 +162,11 @@ input[type=radio]:checked {
     #toolbar.overflowMenu a {
         display: block !important; /* patches welcome */
         width: 100%;
-        color: rgba(0, 0, 0, 0.56);
+        color: rgba(0, 0, 0, 0.87);
         margin: 0;
         height: 2em;
         line-height: 2em;
+        font-weight: normal;
     }
 
     #toolbar.overflowMenu a:hover {
