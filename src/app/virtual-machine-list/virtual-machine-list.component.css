@@ -14,23 +14,34 @@ input {
     margin-left: 0.5em;
     margin-right: 0.5em;
     margin-bottom: 1.5em;
-    border: 1px solid rgba(52, 106, 220, 0.87);
-    border-radius: 0.5em;
+    border: 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.27);
     color: rgba(52, 106, 220, 0.87);
     font-weight: bold;
     padding: 0.5em;
     box-sizing: border-box;
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
     transition: all 0.1ms ease-out;
-}
-
-input:hover{
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    padding-top: 1em;
 }
 
 input:focus {
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid rgba(52, 106, 220, 0.56);
     outline: none;
+}
+
+input::placeholder {
+    font-size: 1.4em;
+    left: 0.5em;
+    position: relative;
+    transition: all .1s ease-out;
+    color: rgba(0, 0, 0, 0.37);
+}
+
+input:focus::placeholder {
+    font-size: 1em;
+    top: -1em;
+    left: 0;
+    color: rgba(52, 106, 220, 0.56);
 }
 
 a {
@@ -42,7 +53,6 @@ a {
     text-decoration: none;
     cursor: pointer;
     color: rgba(0, 0, 0, 0.56);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     transition: all 0.1s ease-out;
 }
 

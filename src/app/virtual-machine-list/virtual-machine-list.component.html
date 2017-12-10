@@ -1,5 +1,5 @@
 <div>
-    <input type="text" [(ngModel)]="filter">
+    <input type="text" [(ngModel)]="filter" placeholder="Filter">
     <a *ngFor="let vm of virtualMachines | filter:'name':filter | virtualMachineSort" routerLink="/vm-detail/{{ vm.uuid }}" routerLinkActive="active">
         <span class="listSubtitle">{{ vm | VirtualMachineState }}</span>
         <span class="listTitle">{{ vm.name }}</span>
