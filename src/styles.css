@@ -82,6 +82,13 @@ main .panel {
     min-width: 16em;
 }
 
+main .panel h2 {
+    color: rgba(0, 0, 0, 0.56);
+    text-align: left;
+    font-size: 1.2em;
+    margin: 0;
+}
+
 input[type=radio] {
     border: 0.13em solid rgba(0, 0, 0, 0.3);
     border-radius: 0.5rem;

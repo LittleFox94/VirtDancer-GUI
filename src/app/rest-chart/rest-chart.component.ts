@@ -148,17 +148,17 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
                                         value -= dataset.previousValue;
                                     }
                                     else {
-                                        value = 0;
+                                        value = null;
                                     }
 
                                     if(dataset.previousTimestamp !== undefined) {
                                         value                /= (timestamp - dataset.previousTimestamp) / 1000;
-                                        dataset.previousValue = data[key];
                                     }
                                     else {
-                                        value = 0;
+                                        value = null;
                                     }
 
+                                    dataset.previousValue     = data[key];
                                     dataset.previousTimestamp = timestamp;
                                 }
 

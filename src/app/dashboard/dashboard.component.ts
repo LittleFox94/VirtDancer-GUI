@@ -7,8 +7,8 @@ import { Component }  from '@angular/core';
 })
 export class DashboardComponent {
 
-    ram_chart_unit: number = 1;
-    net_chart_unit: number = 1;
+    ram_chart_unit: number = 1073741824;
+    net_chart_unit: number = 131072;
 
     constructor() {
     }
