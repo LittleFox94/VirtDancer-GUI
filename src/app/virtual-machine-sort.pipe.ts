@@ -4,6 +4,10 @@ import { VirtualMachine }    from './data/virtual-machine';
 @Pipe({name: 'virtualMachineSort', pure: true})
 export class VirtualMachineSortPipe implements PipeTransform {
     transform(value: VirtualMachine[]): VirtualMachine[] {
+        if(value === undefined) {
+            return value;
+        }
+
         value.sort((a, b) => {
             if(a.active && !b.active) return -1;
             if(!a.active && b.active) return  1;

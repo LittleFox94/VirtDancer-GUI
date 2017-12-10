@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 
 import { DatePipe }                                                  from '@angular/common';
-import { Http }                                                      from '@angular/http';
+import { HttpClient }                                                from '@angular/common/http';
 import { ChartComponent }                                            from 'angular2-chartjs';
 import { IntervalObservable }                                        from 'rxjs/observable/IntervalObservable';
 import { VirtdancerService }                                         from '../virtdancer.service';
@@ -43,7 +43,7 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
     @Input() mode: string = 'raw';
     @ViewChild('chart') chart: ChartComponent;
 
-    constructor(private api: VirtdancerService, private http: Http) { }
+    constructor(private api: VirtdancerService, private http: HttpClient) { }
 
     ngOnInit() {
         this.reset();
@@ -119,7 +119,7 @@ export class RestChartComponent implements OnInit, OnDestroy, OnChanges {
         this.observable = IntervalObservable.create(this.interval).subscribe(() => {
             this.http.get('/api' + this.apiUrl).subscribe(
                 res => {
-                    let data = res.json();
+                    let data = res;
                     let time = new Date();
 
                     if(closureThis.data.labels.length > this.maxData) {

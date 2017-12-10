@@ -1,5 +1,5 @@
 import { Injectable }     from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient }     from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -9,21 +9,16 @@ import { VirtualMachine } from './data/virtual-machine';
 
 @Injectable()
 export class VirtdancerService {
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     getVirtualMachines() : Observable<VirtualMachine[]> {
-        return this.http.get('/api/vm')
-                        .map(this.buildVirtualMachineArray)
+        return this.http.get<Array<VirtualMachine>>('/api/vm')
                         .catch(this.handleError);
-    }
-
-    private buildVirtualMachineArray(res: Response): VirtualMachine[] {
-        return res.json().map(VirtualMachine.fromJson);
     }
 
     getVirtualMachine(uuid: string) : Observable<VirtualMachine> {
         return this.http.get('/api/vm/' + uuid)
-                        .map(this.buildVirtualMachine)
+                        .map(data => VirtualMachine.fromJson(data))
                         .catch(this.handleError);
     }
 
@@ -32,7 +27,7 @@ export class VirtdancerService {
     }
 
     getCpuUsage(): Observable<any> {
-        return this.http.get('/api/stats/cpu').map(res => res.json());
+        return this.http.get('/api/stats/cpu').map(res => res);
     }
 
     private handleError(error: Response | any) {
