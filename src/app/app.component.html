@@ -1,5 +1,5 @@
 <header>
-    <a (click)='toggleVmList()'>☰</a>
+    <a id="vmlistToggleButton" (click)='toggleVmList()'>☰</a>
     <h1>{{title}}</h1>
     <div id="toolbar" [ngClass]="{'overflowMenu': overflowMenuVisible}">
         <a (click)='overflowMenuVisible = false' routerLinkActive="active" routerLink="/dashboard">Dashboard</a>

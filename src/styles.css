@@ -24,14 +24,14 @@ header {
 
 header h1 {
     margin: 0;
+    margin-top: 0.2em;
     padding: 0;
     font-size: 1.7em;
-    display: inline;
+    display: inline-block;
 }
 
 header #toolbar {
     display: inline-block;
-    line-height: 2em;
     height: 100%;
 }
 
@@ -43,6 +43,8 @@ header #toolbar a {
     margin-left: 2em;
     cursor: pointer;
     transition: all 0.1s ease-out;
+    position: relative;
+    top: -0.1em;
 }
 
 header #toolbar a:hover {
@@ -124,8 +126,15 @@ input[type=radio]:checked {
 
 #toolbarOverflowButton {
     font-weight: bold;
+    font-size: 1.3em;
     float: right;
-    margin-top: 0.05em;
+    margin-top: 0.15em;
+}
+
+#vmlistToggleButton {
+    font-size: 1.3em;
+    position: relative;
+    top: -0.15em;
 }
 
 @media (max-width: 666px) {
@@ -136,23 +145,24 @@ input[type=radio]:checked {
     #toolbar.overflowMenu {
         background-color: white;
         border-radius: 0.1em;
-        box-shadow: 0px 7px 15px rgba(0, 0, 0, 0.87);
+        box-shadow: 1px 2px 15px rgba(0, 0, 0, 0.2);
         display: block;
         position: absolute;
         top: 0.5em;
         right: 0.5em;
         z-index: 4;
-        width: 90%;
         height: auto;
         padding-top: 0.5em;
         padding-bottom: 0.5em;
+        padding-left: 1em;
+        padding-right: 2em;
+        max-width: 90%;
     }
 
     #toolbar.overflowMenu a {
         display: block !important; /* patches welcome */
         width: 100%;
-        text-align: center;
-        color: rgba(0, 0, 0, 0.87);
+        color: rgba(0, 0, 0, 0.56);
         margin: 0;
         height: 2em;
         line-height: 2em;
@@ -186,20 +196,30 @@ input[type=radio]:checked {
 
 @media (max-width: 580px) {
     #vmlist div {
-        left: -20em;
-        box-shadow: 0px 0px 25px black;
+        left: -25em;
+        box-shadow: 1px 2px 15px rgba(0, 0, 0, 0.27);
+        transition: left 0.1s ease-out;
     }
 
     #vmlist.visible div {
         left: 0em;
     }
 
-    header a:first-child {
-        display: inline ;
+    #vmlistToggleButton {
+        display: inline-block;
     }
 
     main {
         left: 0;
+        padding: 0;
+    }
+
+    main .panel,
+    main .usage_panel {
+        margin: 0;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
     }
 }
 
