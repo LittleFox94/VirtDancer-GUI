@@ -1,0 +1,11 @@
+{
+  "name": "VirtDancer",
+  "short_name": "VirtDancer",
+  "icons": [
+  ],
+  "theme_color": "#346adc",
+  "background_color": "#e5e5e5",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "any"
+}
