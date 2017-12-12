@@ -1,6 +1,6 @@
 <div class="panel usage_panel">
     <h2>CPU stats</h2>
-    <rest-chart apiUrl="/stats/cpu" [datasets]="['usr', 'sys']" mode="percentage"></rest-chart>
+    <rest-chart apiUrl="/stats/cpu" [datasets]="['usr', 'sys', 'steal', 'irq', 'iowait', 'total']" mode="percentage"></rest-chart>
 </div>
 <div class="panel usage_panel">
     <h2>Memory stats</h2>
